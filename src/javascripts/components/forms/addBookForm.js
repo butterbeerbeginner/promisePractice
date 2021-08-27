@@ -30,3 +30,7 @@ const addBookForm = () => {
 };
 
 export default addBookForm;
+
+// might need to add the two lines underneath the select author; added the label and input type lines as it was missing, and the select author input form was missing on my form on the app.
+//  <label for="select author">Select An Author</label>
+//  <input type="text" class="form-control" id="select-author" placeholder="Select An Author" required>

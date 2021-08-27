@@ -17,7 +17,8 @@ const domEvents = () => {
 
     // CLICK EVENT FOR SUBMITTING FORM FOR ADDING A BOOK
     if (e.target.id.includes('submit-book')) {
-      console.warn('CLICKED SUBMIT BOOK', e.target.id);
+      e.preventDefault();
+      console.warn('submitted form');
     }
 
     // CLICK EVENT FOR SHOWING MODAL FORM FOR ADDING A BOOK
