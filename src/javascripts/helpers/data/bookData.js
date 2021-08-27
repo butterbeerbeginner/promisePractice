@@ -18,7 +18,9 @@ const createBook = (bookObj) => new Promise((resolve, reject) => {
     .then((response) => {
       const body = { firebaseKey: response.data.name };
       axios.patch(`${dbUrl}/books/${response.data.name}.json`, body)
-        .then(() => console.warn('book created'));
+        .then(() => {
+          getBooks().then((booksArray) => resolve(booksArray));
+        });
     }).catch((error) => reject(error));
 });
 
