@@ -1,6 +1,9 @@
 import { showBooks } from '../components/books';
 import addBookForm from '../components/forms/addBookForm';
-import { createBook } from '../helpers/data/bookData';
+import addAuthorForm from '../components/forms/addAuthorform';
+import { createBook, deleteBook, getSingleBook } from '../helpers/data/bookData';
+import { getAuthors, deleteAuthor, createAuthor } from '../helpers/data/authorData';
+import { showAuthors } from '../components/authors';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -8,6 +11,11 @@ const domEvents = () => {
     if (e.target.id.includes('delete-book')) {
       if (window.confirm('Want to delete?')) {
         console.warn('CLICKED DELETE BOOK', e.target.id);
+        console.warn(e.target.id.split('--'));
+        const [, id] = e.target.id.split('--');
+
+        console.warn(id);
+        deleteBook(id).then(showBooks);
       }
     }
 
@@ -31,9 +39,11 @@ const domEvents = () => {
       createBook(bookObject).then((booksArray) => showBooks(booksArray));
     }
 
-    // CLICK EVENT FOR SHOWING MODAL FORM FOR ADDING A BOOK
+    // CLICK EVENT FOR EDITING/UPDATING A BOOK
     if (e.target.id.includes('edit-book-btn')) {
-      console.warn('CLICKED EDIT BOOK', e.target.id);
+      const [, id] = e.target.id.split('--');
+
+      getSingleBook(id).then((bookObj) => addBookForm(bookObj));
     }
 
     // CLICK EVENT FOR EDITING A BOOK
@@ -42,9 +52,36 @@ const domEvents = () => {
     }
 
     // ADD CLICK EVENT FOR DELETING AN AUTHOR
+    if (e.target.id.includes('delete-author')) {
+      if (window.confirm('Want to delete?')) {
+        console.warn('CLICKED DELETE author', e.target.id);
+        console.warn(e.target.id.split('--'));
+        const [, id] = e.target.id.split('--');
+
+        console.warn(id);
+        deleteAuthor(id).then(showAuthors);
+      }
+    }
+
     // ADD CLICK EVENT FOR SHOWING FORM FOR ADDING AN AUTHOR
+    if (e.target.id.includes('add-author-btn')) {
+      console.warn('CLICKED ADD AUTHOR BUTTON', e.target.id);
+      addAuthorForm();
+    }
     // ADD CLICK EVENT FOR SUBMITTING FORM FOR ADDING AN AUTHOR
+    if (e.target.id.includes('submit-author')) {
+      e.preventDefault();
+      const authorObject = {
+      };
+
+      createAuthor(authorObject).then((authorsArray) => showAuthors(authorsArray));
+    }
     // ADD CLICK EVENT FOR EDITING AN AUTHOR
+    if (e.target.id.includes('edit-author-btn')) {
+      const [, id] = e.target.id.split('--');
+
+      getAuthors(id).then((authorObj) => addBookForm(authorObj));
+    }
   });
 };
 
