@@ -1,7 +1,12 @@
 import { showBooks } from '../components/books';
 import addBookForm from '../components/forms/addBookForm';
 import addAuthorForm from '../components/forms/addAuthorform';
-import { createBook, deleteBook, getSingleBook } from '../helpers/data/bookData';
+import {
+  createBook,
+  deleteBook,
+  getSingleBook,
+  updateBook
+} from '../helpers/data/bookData';
 import { getAuthors, deleteAuthor, createAuthor } from '../helpers/data/authorData';
 import { showAuthors } from '../components/authors';
 
@@ -48,7 +53,18 @@ const domEvents = () => {
 
     // CLICK EVENT FOR EDITING A BOOK
     if (e.target.id.includes('update-book')) {
-      console.warn('CLICKED EDIT BOOK', e.target.id);
+      e.preventDefault();
+      const [, firebaseKey] = e.target.id.split('--');
+      const bookObject = {
+        title: document.querySelector('#title').value,
+        image: document.querySelector('#image').value,
+        Price: document.querySelector('#price').value,
+        sale: document.querySelector('#sale').value,
+        author_id: document.querySelector('#author_id').value,
+        firebaseKey
+      };
+
+      updateBook(bookObject).then(showBooks);
     }
 
     // ADD CLICK EVENT FOR DELETING AN AUTHOR
