@@ -31,11 +31,26 @@ const createAuthor = (authorObj) => new Promise((resolve, reject) => {
         });
     }).catch((error) => reject(error));
 });
+
+// FILTER FAVORITE AUTHOR
+const favoriteAuthors = () => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}authors.json?orderBy="favorite"&equalTo=true`)
+    .then((response) => resolve(Object.values(response.data)))
+    .catch((error) => reject(error));
+});
+
 // UPDATE AUTHOR
+const updateAuthor = (authorObj) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/authors/${authorObj.firebaseKey}.json`, authorObj)
+    .then(() => getAuthors().then(resolve))
+    .catch(reject);
+});
 // SEARCH AUTHORS
 
 export {
   getAuthors,
   deleteAuthor,
-  createAuthor
+  createAuthor,
+  favoriteAuthors,
+  updateAuthor
 };

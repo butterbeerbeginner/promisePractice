@@ -21,6 +21,7 @@ const deleteBook = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 // GET SINGLE BOOK
+
 const getSingleBook = (firebaseKey) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/books/${firebaseKey}.json`)
     .then((response) => resolve(response.data))
@@ -28,10 +29,12 @@ const getSingleBook = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 // CREATE BOOK
+
 const createBook = (bookObj) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/books.json`, bookObj)
     .then((response) => {
       const body = { firebaseKey: response.data.name };
+
       axios.patch(`${dbUrl}/books/${response.data.name}.json`, body)
         .then(() => {
           getBooks().then((booksArray) => resolve(booksArray));
@@ -45,20 +48,16 @@ const updateBook = (bookObj) => new Promise((resolve, reject) => {
     .then(() => getBooks().then(resolve))
     .catch(reject);
 });
+
 // SEARCH BOOKS
 
 // FILTER BOOKS ON SALE
 const booksOnSale = () => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}books.json?orderBy="sale"&equalTo=true`)
+  axios.get(`${dbUrl}/books.json?orderBy="sale"&equalTo=true`)
     .then((response) => resolve(Object.values(response.data)))
     .catch((error) => reject(error));
 });
 
 export {
-  getBooks,
-  createBook,
-  booksOnSale,
-  deleteBook,
-  getSingleBook,
-  updateBook
+  getBooks, createBook, booksOnSale, deleteBook, getSingleBook, updateBook
 };

@@ -14,6 +14,7 @@ const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
     // CLICK EVENT FOR DELETING A BOOK
     if (e.target.id.includes('delete-book')) {
+      // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
         console.warn('CLICKED DELETE BOOK', e.target.id);
         console.warn(e.target.id.split('--'));
@@ -69,6 +70,7 @@ const domEvents = () => {
 
     // ADD CLICK EVENT FOR DELETING AN AUTHOR
     if (e.target.id.includes('delete-author')) {
+      // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
         console.warn('CLICKED DELETE author', e.target.id);
         console.warn(e.target.id.split('--'));
