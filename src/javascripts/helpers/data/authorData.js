@@ -34,7 +34,7 @@ const createAuthor = (authorObj) => new Promise((resolve, reject) => {
 
 // FILTER FAVORITE AUTHOR
 const favoriteAuthors = () => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}authors.json?orderBy="favorite"&equalTo=true`)
+  axios.get(`${dbUrl}/authors.json?orderBy="favorite"&equalTo=true`)
     .then((response) => resolve(Object.values(response.data)))
     .catch((error) => reject(error));
 });
