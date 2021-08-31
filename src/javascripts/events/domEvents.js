@@ -9,6 +9,9 @@ import {
 } from '../helpers/data/bookData';
 import { getAuthors, deleteAuthor, createAuthor } from '../helpers/data/authorData';
 import { showAuthors } from '../components/authors';
+import viewBook from '../components/viewBook';
+import viewAuthor from '../components/forms/viewAuthor';
+import { viewBookDetails, viewAuthorDetails } from '../helpers/data/mergedData';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -38,6 +41,7 @@ const domEvents = () => {
         title: document.querySelector('#title').value,
         image: document.querySelector('#image').value,
         price: document.querySelector('#price').value,
+        description: document.querySelector('#description').value,
         sale: document.querySelector('#sale').value,
         author_id: document.querySelector('#author_id').value
       };
@@ -60,6 +64,7 @@ const domEvents = () => {
         title: document.querySelector('#title').value,
         image: document.querySelector('#image').value,
         Price: document.querySelector('#price').value,
+        description: document.querySelector('#description').value,
         sale: document.querySelector('#sale').value,
         author_id: document.querySelector('#author_id').value,
         firebaseKey
@@ -68,6 +73,15 @@ const domEvents = () => {
       updateBook(bookObject).then(showBooks);
     }
 
+    if (e.target.id.includes('view-book-btn')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      viewBookDetails(firebaseKey).then(viewBook);
+    }
+
+    if (e.target.id.includes('view-author-btn')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      viewAuthorDetails(firebaseKey).then(viewAuthor);
+    }
     // ADD CLICK EVENT FOR DELETING AN AUTHOR
     if (e.target.id.includes('delete-author')) {
       // eslint-disable-next-line no-alert

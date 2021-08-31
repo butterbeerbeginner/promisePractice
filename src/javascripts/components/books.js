@@ -1,8 +1,10 @@
+import clearDom from '../helpers/data/clearDom';
+
 const showBooks = (array) => {
   document.querySelector('#add-button').innerHTML = '<button class="btn btn-success btn-lg mb-4" id="add-book-btn">Add A Book</button>';
-
-  document.querySelector('#store').innerHTML = '';
+  clearDom();
   document.querySelector('#form-container').innerHTML = '';
+  document.querySelector('#view').innerHTML = '';
 
   array.forEach((item) => {
     document.querySelector('#store').innerHTML += `<div class="card">

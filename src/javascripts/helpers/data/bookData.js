@@ -21,7 +21,6 @@ const deleteBook = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 // GET SINGLE BOOK
-
 const getSingleBook = (firebaseKey) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/books/${firebaseKey}.json`)
     .then((response) => resolve(response.data))

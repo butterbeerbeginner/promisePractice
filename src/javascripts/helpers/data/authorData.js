@@ -45,6 +45,14 @@ const updateAuthor = (authorObj) => new Promise((resolve, reject) => {
     .then(() => getAuthors().then(resolve))
     .catch(reject);
 });
+
+// GET SINGLE AUTHOR
+const getSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/authors/${firebaseKey}.json`)
+    .then((response) => resolve(response.data))
+    .catch(reject);
+});
+
 // SEARCH AUTHORS
 
 export {
@@ -52,5 +60,6 @@ export {
   deleteAuthor,
   createAuthor,
   favoriteAuthors,
-  updateAuthor
+  updateAuthor,
+  getSingleAuthor
 };
