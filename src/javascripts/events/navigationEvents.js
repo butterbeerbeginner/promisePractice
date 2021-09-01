@@ -12,6 +12,7 @@ const navigationEvents = () => {
 
   // BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
+    console.warn('salebooks');
     booksOnSale().then((booksArray) => showBooks(booksArray));
   });
 

@@ -1,6 +1,8 @@
+// import axios from 'axios';
 import { getSingleAuthor } from './authorData';
 import { getSingleBook } from './bookData';
-
+// import deleteSingleAuthor
+// import deleteBook,
 const viewBookDetails = (firebaseKey) => new Promise((resolve, reject) => {
   getSingleBook(firebaseKey)
     .then((bookObject) => {
@@ -20,6 +22,14 @@ const viewAuthorDetails = (firebaseKey) => new Promise((resolve, reject) => {
         });
     }).catch(reject);
 });
+
+// const deleteAuthorBooks = (authorId) => new Promise((resolve, reject) => {
+//   getAuthorBooks(authorId).then((authorsBookArray) => {
+//     const deleteBooks = authorsBookArray.map((book) => deleteBook(book.firebaseKey));
+//     Promise.all(deleteBooks).then(() => resolve(deleteSingleAuthor(authorId)
+//     ));
+//   }).catch(reject);
+// });
 // const viewBookDetails = (firebaseKey) => (async () => {
 //   const book = await getSingleBook(firebaseKey);
 //   const author = await getSingleAuthor(book.author_id);
@@ -27,3 +37,4 @@ const viewAuthorDetails = (firebaseKey) => new Promise((resolve, reject) => {
 // })().catch(console.warn);
 
 export { viewBookDetails, viewAuthorDetails };
+// deleteAuthorBooks
